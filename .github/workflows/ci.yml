@@ -1,0 +1,15 @@
+name: ci
+on:
+  pull_request:
+  push:
+    branches: ["jog-merge/**"]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: build
+        run: |
+          echo "E2E_TREE=$(git rev-parse HEAD^{tree})"
+          if [ -e FAIL ]; then echo "FAIL is here"; exit 1; fi
