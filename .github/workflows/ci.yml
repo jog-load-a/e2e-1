@@ -12,4 +12,6 @@ jobs:
       - name: build
         run: |
           echo "E2E_TREE=$(git rev-parse HEAD^{tree})"
+          if [ -e SLOW ]; then sleep 150; fi
           if [ -e FAIL ]; then echo "FAIL is here"; exit 1; fi
+          case "${GITHUB_REF_NAME} ${GITHUB_HEAD_REF}" in *jog-merge/*) if [ -e QFAIL ]; then echo "QFAIL in the queue"; exit 1; fi;; esac
