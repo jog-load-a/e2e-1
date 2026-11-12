@@ -1,0 +1,15 @@
+name: t1-notcancelled
+on:
+  pull_request:
+    branches: ["e2e/t1-base"]
+jobs:
+  work:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sleep 300
+  gate:
+    needs: [work]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: '[ "${{ needs.work.result }}" = "success" ] || exit 1'
