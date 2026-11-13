@@ -1,0 +1,9 @@
+name: t1b-wait
+on:
+  pull_request:
+    branches: ["e2e/t1b-base"]
+jobs:
+  gate:
+    runs-on: jog-4vcpu
+    steps:
+      - run: echo never
