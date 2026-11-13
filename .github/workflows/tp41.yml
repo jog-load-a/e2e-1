@@ -1,0 +1,19 @@
+name: tp41
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      q: ${{ steps.pick.outputs.q }}
+    steps:
+      - id: pick
+        run: echo "q=${{ contains(github.head_ref, 'tp41-yes') }}" >> "$GITHUB_OUTPUT"
+      - name: This run is a queue test pull request
+        if: steps.pick.outputs.q == 'true'
+        run: echo "a queue test pull request"
+  boom:
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 1
