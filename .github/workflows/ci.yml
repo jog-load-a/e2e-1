@@ -1,19 +1,8 @@
 name: ci
 on:
   pull_request:
-  push:
-    branches: ["jog-merge/**", "main"]
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - name: build
-        run: |
-          echo "E2E_TREE=$(git rev-parse HEAD^{tree})"
-          case "${GITHUB_REF_NAME} ${GITHUB_HEAD_REF}" in *jog-merge/*)
-            if ls qslow/* >/dev/null 2>&1; then echo "qslow: a slow queue test"; sleep 120; fi
-            if [ -e QFAIL ]; then echo "QFAIL in the queue"; exit 1; fi;;
-          esac
-          if [ -e FAIL ]; then echo "FAIL is here"; exit 1; fi
+      - run: exit 1
