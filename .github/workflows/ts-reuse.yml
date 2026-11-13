@@ -1,0 +1,12 @@
+name: ts-reuse
+on:
+  pull_request:
+    branches: ["e2e/ts-base"]
+jobs:
+  outer:
+    uses: ./.github/workflows/ts-called.yml
+  gate:
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo never
