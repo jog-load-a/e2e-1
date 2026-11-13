@@ -1,0 +1,12 @@
+name: tj1-called
+on:
+  workflow_call:
+jobs:
+  c1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo c1
+  c2:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo c2
