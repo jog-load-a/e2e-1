@@ -1,0 +1,40 @@
+name: tj1
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  a:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo a
+  b:
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo b
+  m:
+    if: false
+    strategy:
+      matrix:
+        p: [x, y]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo m
+  l:
+    strategy:
+      matrix:
+        include:
+          - p: 1
+            q: a b
+          - p: 2
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo l
+  r:
+    uses: ./.github/workflows/tj1-called.yml
+  gate:
+    needs: [a, b, m, l, r]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo gate
