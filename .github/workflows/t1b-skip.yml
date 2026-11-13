@@ -1,0 +1,15 @@
+name: t1b-skip
+on:
+  pull_request:
+    branches: ["e2e/t1b-base"]
+jobs:
+  work:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo work
+  gate:
+    needs: work
+    if: ${{ !cancelled() && github.event.pull_request.title == 'never' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo gate
