@@ -1,0 +1,9 @@
+name: ts-queued
+on:
+  pull_request:
+    branches: ["e2e/ts-base"]
+jobs:
+  waits:
+    runs-on: jog-4vcpu
+    steps:
+      - run: echo never
