@@ -1,0 +1,9 @@
+name: ts-gate
+on:
+  pull_request:
+    branches: ["e2e/ts-base"]
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 1
