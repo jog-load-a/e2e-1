@@ -1,0 +1,10 @@
+name: tsec-wfrun
+on:
+  workflow_run:
+    workflows: [tsec-trigger]
+    types: [completed]
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "gate from ${{ github.event_name }}"
