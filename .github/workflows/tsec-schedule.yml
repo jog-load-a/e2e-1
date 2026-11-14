@@ -1,0 +1,9 @@
+name: tsec-schedule
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "gate from ${{ github.event_name }}"
