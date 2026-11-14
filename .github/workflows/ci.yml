@@ -6,13 +6,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
       - name: build
         run: |
           echo "E2E_TREE=$(git rev-parse HEAD^{tree})"
           case "${GITHUB_REF_NAME} ${GITHUB_HEAD_REF}" in *jog-merge/*)
+            if [ -e A6345 ] && [ ! -e B6345 ]; then echo "#6345: a queue test with A6345 and without B6345 runs 40 min"; sleep 2400; fi
             if ls qslow/* >/dev/null 2>&1; then echo "qslow: a slow queue test"; sleep 120; fi
             if [ -e QFAIL ]; then echo "QFAIL in the queue"; exit 1; fi;;
           esac
