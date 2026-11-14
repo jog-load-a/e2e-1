@@ -1,8 +1,0 @@
-name: tsec-dispatch
-on:
-  workflow_dispatch:
-jobs:
-  gate:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "gate from ${{ github.event_name }}"
