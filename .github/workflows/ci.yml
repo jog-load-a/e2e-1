@@ -12,6 +12,9 @@ jobs:
       - name: build
         run: |
           echo "E2E_TREE=$(git rev-parse HEAD^{tree})"
+          case "${GITHUB_EVENT_NAME} ${GITHUB_HEAD_REF}" in "pull_request e2e/ytr-slow-"*)
+            echo "ytr: a slow PR's own run"; sleep 480;;
+          esac
           case "${GITHUB_REF_NAME} ${GITHUB_HEAD_REF}" in *jog-merge/*)
             if ls qslow/* >/dev/null 2>&1; then echo "qslow: a slow queue test"; sleep 120; fi
             if [ -e QFAIL ]; then echo "QFAIL in the queue"; exit 1; fi;;
